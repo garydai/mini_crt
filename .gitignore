@@ -2,6 +2,6 @@
 *.sdf 
   
 #¹ıÂËÎÄ¼ş¼ĞDebug,Release,obj  
-Debug/  
-Release/  
+Debug/
+Release/ 
 ipch/
