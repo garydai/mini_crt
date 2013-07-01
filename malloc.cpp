@@ -48,7 +48,7 @@ void* malloc(unsigned size)
 				return iter;
 
 			}
-			else if(iter->size == size)
+			else if(iter->size == size + HEAD_SIZE)
 			{
 				iter->type = HEAP_BLOCK_USED;
 				return iter;
@@ -59,6 +59,30 @@ void* malloc(unsigned size)
 
 }
 
+void free(heap* base)
+{
+	if(base->next && base->next == HEAP_BLOCK_FREE)
+	{
+		heap* next = base->next;
+		base->size += next->size;
+		base->next = next->next;
+		next->next->prev = base;
+
+	}
+	if(base->prev && base->prev == HEAP_BLOCK_FREE)
+	{
+		heap* prev = base->prev;
+		prev->size += base->size;
+		prev->next = base->next;
+		if(base->next != NULL)
+		{
+			base->next->prev = prev;
+		}
+
+		base = prev;
+	}
+	base->type = HEAP_BLOCK_FREE;
+}
 bool mini_crt_heap_init()
 {
 	void* base;
