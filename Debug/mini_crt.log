@@ -1,0 +1,14 @@
+﻿Build started 2013/7/1 19:56:43.
+     1>Project "D:\mystuff\mini_crt\mini_crt.vcxproj" on node 2 (ClCompile target(s)).
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt malloc.cpp
+         malloc.cpp
+     1>d:\mystuff\mini_crt\malloc.cpp(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>d:\mystuff\mini_crt\malloc.cpp(23): warning C4273: 'malloc' : inconsistent dll linkage
+                 d:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(600) : see previous definition of 'malloc'
+     1>d:\mystuff\mini_crt\malloc.cpp(60): warning C4715: 'malloc' : not all control paths return a value
+     1>Done Building Project "D:\mystuff\mini_crt\mini_crt.vcxproj" (ClCompile target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.33
