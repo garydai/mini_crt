@@ -35,6 +35,7 @@ int mini_crt::vfprintf(FILE* stream, const char* format, va_list list)
 	int ret = 0;
 	while(*format)
 	{
+		fputc(*format, stream);
 		if(*format == '%')
 		{
 			if(!pre)
@@ -48,7 +49,7 @@ int mini_crt::vfprintf(FILE* stream, const char* format, va_list list)
 					return -1;
 				}
 				ret ++;
-				format ++;
+
 				pre = false;
 			}
 		}
@@ -63,7 +64,6 @@ int mini_crt::vfprintf(FILE* stream, const char* format, va_list list)
 					return -1;
 				}
 				ret += strlen(buf);
-				format ++;
 				pre = false;
 
 				
@@ -75,7 +75,6 @@ int mini_crt::vfprintf(FILE* stream, const char* format, va_list list)
 					return -1;
 				}
 				ret ++;
-				format ++;
 				pre = false;
 			}
 
@@ -87,7 +86,6 @@ int mini_crt::vfprintf(FILE* stream, const char* format, va_list list)
 				return -1;
 			}
 			ret ++;
-			format ++;
 			pre = false;
 		}
 /*
@@ -118,6 +116,7 @@ int mini_crt::vfprintf(FILE* stream, const char* format, va_list list)
 			}
 		}
 		*/
+		format ++;
 	}
 }
 
