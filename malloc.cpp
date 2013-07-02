@@ -1,25 +1,12 @@
 #include "minicrt.h"
-#include <Windows.h>;
-enum
-{
-	HEAP_BLOCK_FREE = 0xA,
-	HEAP_BLOCK_USED = 0xB,
-};
-
-typedef struct _heap
-{
-	int type;
-	unsigned size; //内存大小，包括heap头
-	_heap* next;
-	_heap* prev;
-}heap;
+using namespace mini_crt;
 
 static heap* heap_head = NULL;
 
 #define HEAD_SIZE sizeof(heap)
 #define ADDR_ADD(a, s) ((char*)(a) + s)
 
-void* malloc(unsigned size)
+void* mini_crt::malloc(int size)
 {
 	if(heap_head == NULL)
 	{
@@ -56,12 +43,13 @@ void* malloc(unsigned size)
 		}
 		
 	}
+	return NULL;
 
 }
 
-void free(heap* base)
+void mini_crt::free(heap* base)
 {
-	if(base->next && base->next == HEAP_BLOCK_FREE)
+	if(base->next && base->next->type == HEAP_BLOCK_FREE)
 	{
 		heap* next = base->next;
 		base->size += next->size;
@@ -69,7 +57,7 @@ void free(heap* base)
 		next->next->prev = base;
 
 	}
-	if(base->prev && base->prev == HEAP_BLOCK_FREE)
+	if(base->prev && base->prev->type == HEAP_BLOCK_FREE)
 	{
 		heap* prev = base->prev;
 		prev->size += base->size;
@@ -83,7 +71,7 @@ void free(heap* base)
 	}
 	base->type = HEAP_BLOCK_FREE;
 }
-bool mini_crt_heap_init()
+bool mini_crt::mini_crt_heap_init()
 {
 	void* base;
 	int size = 32 * 1024 * 1024;

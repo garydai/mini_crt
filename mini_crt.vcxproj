@@ -49,7 +49,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -76,6 +76,10 @@
   <ItemGroup>
     <ClCompile Include="entry.cpp" />
     <ClCompile Include="malloc.cpp" />
+    <ClCompile Include="printf.cpp" />
+    <ClCompile Include="stdio.cpp" />
+    <ClCompile Include="string.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="minicrt.h" />

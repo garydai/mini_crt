@@ -1,11 +1,17 @@
 #include "minicrt.h"
-#include <Windows.h>
-#include <stdio.h>
 
-void mini_crt_entry(void)
+using namespace mini_crt;
+
+extern int main(int argc, char* argv[]);
+
+void mini_exit(int exit_code)
+{
+	ExitProcess(exit_code);
+}
+
+void mini_crt::mini_crt_entry(void)
 {
 	int ret;
-	int flag = 0;
 	char* argv[16];//最多16个参数
 	char* cl = GetCommandLineA();
 
@@ -46,26 +52,26 @@ void mini_crt_entry(void)
 	}
 
 	ret = main(arvc, argv);
-	exit(ret);
+	mini_exit(ret);
 
 }
-void exit(int exit_code)
-{
-	ExitProcess(exit_code);
-}
+/*
 int main(int argc, char* argv[])
 {
 
-	char* c = "11";
+	const char* c = "11";
 	//*c = '2';
 	char* cl = GetCommandLineA();
 
 	*cl = '1';
-	printf("%s\n", cl);
+
+	const char *t = va_arg(c,  const char*);
+	//printf("%s\n", sizeof(char*));
 	for(int i = 0; i < argc; i ++)
 	{
 
-		printf("%s\n", argv[i]);
+	//	printf("%s\n", argv[i]);
 	}
 
 }
+*/
