@@ -1,9 +1,10 @@
 #include "minicrt.h"
-using namespace mini_crt;
+namespace mini_crt
+{
 
 
 
-int mini_crt::fputc(int ch, FILE* stream)
+int fputc(int ch, FILE* stream)
 {
 	if(fwrite(&ch, 1, 1, stream) != 1)
 	{
@@ -16,7 +17,7 @@ int mini_crt::fputc(int ch, FILE* stream)
 
 }
 
-int mini_crt::fputs(const char* s, FILE* stream)
+int fputs(const char* s, FILE* stream)
 {
 	int len = strlen(s);
 	if(fwrite(&s, len, 1, stream) != len)
@@ -29,13 +30,13 @@ int mini_crt::fputs(const char* s, FILE* stream)
 	}
 }
 
-int mini_crt::vfprintf(FILE* stream, const char* format, va_list list)
+int vfprintf(FILE* stream, const char* format, va_list list)
 {
 	bool pre = 0;
 	int ret = 0;
 	while(*format)
 	{
-		fputc(*format, stream);
+		mini_crt::fputc(*format, stream);
 		if(*format == '%')
 		{
 			if(!pre)
@@ -44,7 +45,7 @@ int mini_crt::vfprintf(FILE* stream, const char* format, va_list list)
 			}
 			else
 			{
-				if(fputc(*format, stream) == -1)
+				if(mini_crt::fputc(*format, stream) == -1)
 				{
 					return -1;
 				}
@@ -58,8 +59,8 @@ int mini_crt::vfprintf(FILE* stream, const char* format, va_list list)
 			if(pre)
 			{
 				char buf[11];
-				itoa(va_arg(list, int), buf, 10);
-				if(fputs(buf, stream) == -1)
+				mini_crt::itoa(va_arg(list, int), buf, 10);
+				if(mini_crt::fputs(buf, stream) == -1)
 				{
 					return -1;
 				}
@@ -70,7 +71,7 @@ int mini_crt::vfprintf(FILE* stream, const char* format, va_list list)
 			}
 			else
 			{
-				if(fputc('d', stream) == -1)
+				if(mini_crt::fputc('d', stream) == -1)
 				{
 					return -1;
 				}
@@ -81,7 +82,7 @@ int mini_crt::vfprintf(FILE* stream, const char* format, va_list list)
 		}
 		else
 		{
-			if(fputc(*format, stream) == -1)
+			if(mini_crt::fputc(*format, stream) == -1)
 			{
 				return -1;
 			}
@@ -120,17 +121,18 @@ int mini_crt::vfprintf(FILE* stream, const char* format, va_list list)
 	}
 }
 
-int mini_crt::printf(const char* format, ...)
+int printf(const char* format, ...)
 {
 	va_list(arglist);
 	va_start(arglist, format);
 	return vfprintf(stdout, format, arglist);
 
 }
-int mini_crt::fprintf(FILE* stream, const char* format, ...)
+int fprintf(FILE* stream, const char* format, ...)
 {
 	va_list(arglist);
 	va_start(arglist, format);
 	return vfprintf(stream, format, arglist);
 
+}
 }

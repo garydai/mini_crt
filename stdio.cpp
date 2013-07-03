@@ -1,13 +1,14 @@
 #include "minicrt.h"
 
-using namespace mini_crt;
+namespace mini_crt
+{
 
-bool mini_crt::mini_crt_io_init()
+bool mini_crt_io_init()
 {
 	return 1;
 }
 
-FILE* mini_crt::fopen(const char* filename, const char* mode)
+FILE* fopen(const char* filename, const char* mode)
 {
 	HANDLE hFile = 0;
 	int access = 0;
@@ -43,19 +44,19 @@ FILE* mini_crt::fopen(const char* filename, const char* mode)
 
 }
 
-int mini_crt::fclose(FILE* f)
+int fclose(FILE* f)
 {
 	return CloseHandle((HANDLE)f);
 }
 
-int mini_crt::fread(void* buffer, int size, int count, FILE* stream)
+int fread(void* buffer, int size, int count, FILE* stream)
 {
 	DWORD read = 0;
 	if(!ReadFile((HANDLE)stream, buffer, size * count, &read, 0))
 		return 0;
 	return read;
 }
-int mini_crt::fwrite(void* buffer, int size, int count, FILE* stream)
+int fwrite(void* buffer, int size, int count, FILE* stream)
 {
 	DWORD write = 0;
 	if(!WriteFile((HANDLE)stream, buffer, size * count, &write, 0))
@@ -63,7 +64,8 @@ int mini_crt::fwrite(void* buffer, int size, int count, FILE* stream)
 	return write;
 }
 
-int mini_crt::fseek(FILE* fp, int offset, int set)
+int fseek(FILE* fp, int offset, int set)
 {
 	return SetFilePointer((HANDLE)fp, offset, 0, set);
+}
 }

@@ -2,6 +2,9 @@
 #define _mini_crt_h_
 #include <windows.h>
 
+extern "C"
+{
+
 
 namespace mini_crt
 {
@@ -62,5 +65,6 @@ int fputs(const char* s, FILE* stream);
 int fprintf(FILE* stream, const char* format, ...);
 int printf(const char* format, ...);
 int vfprintf(FILE* stream, const char* format, va_list list);
+};
 };
 #endif

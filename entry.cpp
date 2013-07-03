@@ -1,20 +1,21 @@
 #include "minicrt.h"
 
-using namespace mini_crt;
 
 extern int main(int argc, char* argv[]);
+namespace mini_crt
+{
 
 void mini_exit(int exit_code)
 {
 	ExitProcess(exit_code);
 }
 
-void mini_crt::mini_crt_entry(void)
+void mini_crt_entry(void)
 {
 	int ret;
 	char* argv[16];//最多16个参数
 	char* cl = GetCommandLineA();
-
+	fputc('t', stdout);
 	int arvc = 0;
 	//解析命令行
 	argv[0] = cl;
@@ -54,6 +55,7 @@ void mini_crt::mini_crt_entry(void)
 	ret = main(arvc, argv);
 	mini_exit(ret);
 
+}
 }
 /*
 int main(int argc, char* argv[])

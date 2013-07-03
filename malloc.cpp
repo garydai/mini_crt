@@ -1,5 +1,6 @@
 #include "minicrt.h"
-using namespace mini_crt;
+namespace mini_crt
+{
 
 static heap* heap_head = NULL;
 
@@ -47,7 +48,7 @@ void* mini_crt::malloc(int size)
 
 }
 
-void mini_crt::free(heap* base)
+void free(heap* base)
 {
 	if(base->next && base->next->type == HEAP_BLOCK_FREE)
 	{
@@ -71,7 +72,7 @@ void mini_crt::free(heap* base)
 	}
 	base->type = HEAP_BLOCK_FREE;
 }
-bool mini_crt::mini_crt_heap_init()
+bool mini_crt_heap_init()
 {
 	void* base;
 	int size = 32 * 1024 * 1024;
@@ -84,4 +85,5 @@ bool mini_crt::mini_crt_heap_init()
 	heap_head->next = NULL;
 	heap_head->prev = NULL;
 	return true;
+}
 }
