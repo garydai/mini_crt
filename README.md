@@ -12,4 +12,4 @@ implement of minicrt
 	cl /c /DWIN32 /GS- test.cpp
 
 
-	link test.obj minicrt.lib kernel32.lib 
+	link test.obj minicrt.lib kernel32.lib /NODEFAULTLIB /entry:mini_crt_entry 
