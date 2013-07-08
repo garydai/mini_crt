@@ -56,7 +56,7 @@ unsigned strlen(const char* src);
 
 /////////////////////////////////////////////////////
 #define va_list char*
-#define va_start(ap, arg) (ap = (va_list)(&arg + sizeof(arg)))
+#define va_start(ap, arg) (ap = (va_list)((char*)(&format) + sizeof(format)))
 #define va_arg(ap, t) ( *(t*)((ap += sizeof(t)) - sizeof(t)) )
 #define va_end(ap) (ap = (va_list)0)
 

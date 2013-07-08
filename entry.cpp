@@ -15,7 +15,7 @@ void mini_crt_entry(void)
 	int ret;
 	char* argv[16];//最多16个参数
 	char* cl = GetCommandLineA();
-	fputc('t', stdout);
+	fputs("mini_crt_entry!!", stdout);
 	int arvc = 0;
 	//解析命令行
 	argv[0] = cl;

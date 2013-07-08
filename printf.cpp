@@ -20,7 +20,7 @@ int fputc(int ch, FILE* stream)
 int fputs(const char* s, FILE* stream)
 {
 	int len = strlen(s);
-	if(fwrite(&s, len, 1, stream) != len)
+	if(fwrite((void*)s, len, 1, stream) != len)
 	{
 		return -1;
 	}
@@ -36,7 +36,7 @@ int vfprintf(FILE* stream, const char* format, va_list list)
 	int ret = 0;
 	while(*format)
 	{
-		mini_crt::fputc(*format, stream);
+		//mini_crt::fputc(*format, stream);
 		if(*format == '%')
 		{
 			if(!pre)
